@@ -1,6 +1,9 @@
 name: Test Project
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -12,7 +15,7 @@ jobs:
       image: node:20
 
     steps:
-      - uses: actions/checkout@v3 #uses-> run an action already available in github actions actions/checkout checks out repo code so that workflow (vmm that github creates for each script it runs) can acess it v3->version of the action this will use vmm given by vmm unless told not to
+      - uses: actions/checkout@v3
 
       - name: Install dependencies
         run: npm ci
@@ -20,5 +23,5 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Build project # build inside dist folder inside container
+      - name: Build project
         run: npm run build
